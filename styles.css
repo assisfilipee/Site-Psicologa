@@ -1,0 +1,2559 @@
+/* ==================================================
+  STYLE.CSS — Psicóloga (base + navbar)
+  - Desktop-first (sem responsividade por enquanto)
+  - Paleta bege + elegância
+================================================== */
+
+/* =========================
+  01) RESET + BASE
+========================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-padding-top: 0; /* ✅ funciona para TODAS as âncoras */
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:#2a2420;
+  background:#fbf7f1; /* bege bem claro */
+  line-height:1.6;
+}
+
+/* melhora seleção (opcional, mas premium) */
+::selection{
+  background:rgba(184, 148, 110, .28);
+}
+
+/* =========================
+  02) VARIÁVEIS (PALETA)
+========================= */
+:root{
+  --container: 1120px;
+
+  --bg: #fbf7f1;
+  --surface: #fffaf2;
+
+  --text: #2a2420;
+  --muted: #6b5f56;
+
+  --bege: #efe2d2;         /* navbar topo */
+  --bege-2: #e7d6c3;       /* bordas suaves */
+  --accent: #b8946e;       /* detalhes (dourado/bege) */
+
+  --shadow: 0 16px 40px rgba(42, 36, 32, .10);
+  --shadow-soft: 0 10px 30px rgba(42, 36, 32, .08);
+
+  --radius: 16px;
+}
+
+/* =========================
+  03) CONTAINER
+========================= */
+.container{
+  width:min(var(--container), 92vw);
+  margin:0 auto;
+}
+
+/* =========================
+  04) TIPOGRAFIA (harmonia)
+========================= */
+.title{
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+  letter-spacing:-.2px;
+  color:var(--text);
+}
+
+.section__title{
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+  letter-spacing:-.2px;
+  color:var(--text);
+}
+
+.lead{
+  color:var(--muted);
+  max-width: 64ch;
+}
+
+/* =========================
+  05) HEADER / NAVBAR
+  - fixa no topo
+  - bege sólido no topo
+  - quando rolar: fica levemente transparente (classe .is-scrolled)
+========================= */
+.header{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:9999;
+
+  background:var(--bege);
+  border-bottom:1px solid rgba(42, 36, 32, .08);
+
+  transition:
+    background .25s ease,
+    box-shadow .25s ease,
+    backdrop-filter .25s ease,
+    border-color .25s ease;
+}
+
+/* estado: ao rolar (vamos ativar no JS depois) */
+.header.is-scrolled{
+  background:rgba(239, 226, 210, .78); /* bege transparente */
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+  border-bottom:1px solid rgba(42, 36, 32, .10);
+}
+
+/* estrutura interna */
+.header__inner{
+  height:84px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:28px;
+}
+
+/* =========================
+  LOGO TIPOGRÁFICA — PREMIUM
+========================= */
+.brand{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  text-decoration:none;
+}
+
+/* texto da marca */
+.brand__name{
+  font-family:"Playfair Display", serif;
+  font-size:22px;
+  font-weight:600;
+  letter-spacing:.6px;
+  color:#b8946e;
+
+  transition:
+    color .28s ease,
+    transform .28s cubic-bezier(.22,.9,.22,1),
+    letter-spacing .28s ease;
+}
+
+/* linha premium animada */
+.brand::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:100%;
+  height:1.5px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(184,148,110,.9),
+    transparent
+  );
+
+  transform: scaleX(.4);
+  transform-origin:center;
+  opacity:.7;
+
+  transition: transform .35s ease, opacity .35s ease;
+}
+
+/* hover */
+.brand:hover .brand__name{
+  color:#9f7c58;
+  letter-spacing:1.1px;
+  transform: translateY(-1px);
+}
+
+.brand:hover::after{
+  transform: scaleX(1);
+  opacity:1;
+}
+
+/* clique */
+.brand:active .brand__name{
+  transform: translateY(0) scale(.98);
+}
+
+/* =========================
+  07) NAV LINKS (direita)
+========================= */
+.nav__list{
+  list-style:none;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.nav__link{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+
+  text-decoration:none;
+  color:rgba(42, 36, 32, .88);
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+
+  padding:10px 6px;
+  border-radius:10px;
+
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.nav__link:hover{
+  opacity:1;
+  transform: translateY(-1px);
+}
+
+/* sublinhado premium (accent) */
+.nav__link::after{
+  content:"";
+  position:absolute;
+  left:8px;
+  right:8px;
+  bottom:6px;
+  height:2px;
+
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity:0;
+  transform: scaleX(.6);
+  transform-origin:center;
+
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.nav__link:hover::after{
+  opacity:1;
+  transform: scaleX(1);
+}
+
+/* foco acessível */
+.nav__link:focus-visible,
+.brand:focus-visible{
+  outline:3px solid rgba(184, 148, 110, .35);
+  outline-offset:3px;
+  border-radius:12px;
+}
+
+/* =========================
+  08) ESPAÇAMENTO DO TOPO
+  - como o header é fixed, a página precisa "descer" pra não ficar atrás dele
+========================= */
+main{
+  padding-top: 0; /* igual à altura do header */
+}
+
+/* =========================
+  09) SEÇÕES (base)
+========================= */
+.section{
+  padding: 98px 0;
+}
+
+/* se você quiser garantir que as seções NÃO fiquem por baixo do header fixo,
+   dá pra aplicar um offset só nelas (não na HERO) */
+.section:not(#inicio){
+  scroll-margin-top: 0;
+}
+
+.section--inicio{
+  padding: 110px 0 96px;
+  background:
+    radial-gradient(900px 450px at 12% 10%, rgba(184,148,110,.20), transparent 60%),
+    radial-gradient(900px 450px at 90% 20%, rgba(231,214,195,.55), transparent 55%),
+    linear-gradient(180deg, rgba(255,250,242,.8), rgba(251,247,241,1));
+  border-bottom:1px solid rgba(42,36,32,.06);
+}
+
+/* títulos do hero */
+.section--inicio .title{
+  font-size: 52px;
+  line-height: 1.08;
+  max-width: 18ch;
+}
+
+.section--inicio .lead{
+  margin-top: 14px;
+  font-size: 18px;
+}
+
+/* títulos das seções */
+.section__title{
+  font-size: 34px;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.section__text{
+  color: var(--muted);
+  max-width: 74ch;
+  font-size: 16px;
+}
+
+/* =========================
+  HERO (INÍCIO) — 100vh + IMAGEM FUNDO
+  - referência: foto à direita, texto à esquerda
+========================= */
+.hero{
+  position:relative;
+  height:100vh;            /* ✅ tela toda */
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+
+  padding-bottom:84px;     /* mantém um respiro embaixo se quiser */
+  border-bottom:1px solid rgba(42,36,32,.06);
+  background:#f6efe6;
+}
+
+/* camada da imagem + overlays */
+.hero__bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+
+  background-image:
+    linear-gradient(90deg,
+      rgba(251,247,241,.92) 0%,
+      rgba(251,247,241,.86) 42%,
+      rgba(251,247,241,.35) 68%,
+      rgba(251,247,241,.10) 100%
+    ),
+    url("./img/fundo-home.webp");
+
+  background-size:cover;
+  background-position:right center;
+  background-repeat:no-repeat;
+
+  transform: scale(1.02);
+}
+
+/* conteúdo acima do bg */
+.hero__inner{
+  position:relative;
+  z-index:1;
+}
+
+.hero__content{
+  max-width:640px;
+  padding-top:84px; /* apenas compensação do header */
+}
+
+/* título estilo editorial (bem parecido com referência) */
+.hero__title{
+  font-family:"Cormorant Garamond", serif;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1.1;
+  letter-spacing: .2px;
+  color: #2a2420;
+  margin: 0;
+}
+
+/* subtítulo */
+.hero__subtitle{
+  margin-top:20px;
+  max-width:54ch;
+  font-size:18px;
+  line-height:1.65;
+  color:rgba(42,36,32,.75);
+}
+
+/* ações */
+.hero__actions{
+  margin-top:28px;
+  display:flex;
+  gap:14px;
+}
+
+/* =========================
+  HERO: PALAVRA + UNDERLINE CURVO (SVG)
+  - 3s sem
+  - 5s com
+  - 4s sem
+  - total 12s loop
+========================= */
+.word-curve{
+  position:relative;
+  display:inline-block;
+
+  /* cor mais clara só nessa palavra */
+  color: rgba(42, 36, 32, .58);
+}
+
+/* SVG do underline */
+.word-curve__svg{
+  position:absolute;
+  left:-2%;
+  width:104%;
+  height:0.55em;
+
+  /* controla a posição vertical do traço */
+  bottom:-0.18em;
+
+  pointer-events:none;
+}
+
+/* traço */
+.word-curve__path{
+  fill:none;
+  stroke: rgba(42, 36, 32, .58); /* mesma cor da palavra */
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  /* “desenho” por dash */
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+
+  opacity:0;
+
+  animation: curvePulse 12s infinite;
+}
+
+/* =========================
+  KEYFRAMES (timing exato)
+  0%  - 25%  = 3s (sem)
+  25% - 66.666% = 5s (com)
+  66.666% - 100% = 4s (sem)
+========================= */
+@keyframes curvePulse{
+  /* 0s → 3s: escondido */
+  0%{
+    opacity:0;
+    stroke-dashoffset: 520;
+  }
+  25%{
+    opacity:0;
+    stroke-dashoffset: 520;
+  }
+
+  /* ~3s → ~3.4s: desenha e aparece */
+  30%{
+    opacity:1;
+    stroke-dashoffset: 0;
+  }
+
+  /* mantém até 8s */
+  66.666%{
+    opacity:1;
+    stroke-dashoffset: 0;
+  }
+
+  /* some rápido e “reseta” */
+  72%{
+    opacity:0;
+    stroke-dashoffset: 520;
+  }
+
+  /* fica sem até completar o ciclo */
+  100%{
+    opacity:0;
+    stroke-dashoffset: 520;
+  }
+}
+
+/* =========================
+  ACESSIBILIDADE — reduz movimento
+========================= */
+@media (prefers-reduced-motion: reduce){
+  .word-curve__path{
+    animation:none;
+    opacity:0;
+    stroke-dashoffset: 520;
+  }
+}
+
+/* =========================
+  BOTÕES — PREMIUM (base)
+========================= */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  padding:12px 22px;
+  border-radius:999px;
+
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:.3px;
+  text-decoration:none;
+
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease, opacity .2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* botão principal (tom terroso/bege) */
+.btn--primary{
+  background: #b8946e;
+  color:#fff;
+  box-shadow: 0 14px 28px rgba(42,36,32,.18);
+}
+
+.btn--primary:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  box-shadow: 0 18px 34px rgba(42,36,32,.22);
+}
+
+.btn--primary:active{
+  transform: translateY(0);
+  opacity:.92;
+}
+
+/* ==================================================
+  SOBRE — LAYOUT
+================================================== */
+.sobre{
+  display:grid;
+  grid-template-columns: 460px 1fr; /* ✅ antes 520px */
+  gap:72px;
+  align-items:center;
+}
+
+/* =========================
+  CARD FOTO
+========================= */
+.sobre__card{
+  position:relative;
+  border-radius:34px;
+  overflow:hidden;
+
+  /* borda sutil + sombra premium */
+  border:1px solid rgba(184,148,110,.18);
+  box-shadow:
+    0 26px 60px rgba(0,0,0,.10),
+    0 10px 22px rgba(0,0,0,.06);
+
+  transform: translateZ(0);
+  transition: transform .35s cubic-bezier(.22,.9,.22,1), box-shadow .35s ease;
+}
+
+.sobre__card img{
+  width:100%;
+  height:auto;
+  display:block;
+
+  transform: scale(1.01);
+  transition: transform .6s cubic-bezier(.22,.9,.22,1), filter .35s ease;
+}
+
+/* “glow” quente bem sutil */
+.sobre__card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  background:
+    radial-gradient(70% 60% at 30% 20%, rgba(184,148,110,.18), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.08), transparent 35%);
+  opacity:.9;
+}
+
+/* hover discreto */
+.sobre__card:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 34px 70px rgba(0,0,0,.12),
+    0 14px 28px rgba(0,0,0,.08);
+}
+
+.sobre__card:hover img{
+  transform: scale(1.045);
+  filter: saturate(1.02) contrast(1.02);
+}
+
+/* =========================
+  TEXTO
+========================= */
+.sobre__kicker{
+  font-size:14px;
+  color:#b8946e;
+  font-weight:600;
+}
+
+.sobre__title{
+  font-family:"Cormorant Garamond", serif;
+  font-size:46px;
+  margin:10px 0 18px;
+  color:#9c6b5a;
+}
+
+.sobre__content p{
+  color:#5c5753;
+  line-height:1.7;
+  margin-bottom:18px;
+}
+
+/* =========================
+  ACCORDION
+========================= */
+.sobre__accordion{
+  margin-top:10px;
+  font-weight:600;
+  color:#b8946e;
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.sobre__panel{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+}
+
+.sobre__panel ul{
+  margin-top:16px;
+  padding-left:18px;
+  color:#5c5753;
+  line-height:1.7;
+}
+
+/* =========================
+  BOTÃO
+========================= */
+.sobre__cta{
+  margin-top:28px;
+}
+
+/* ==================================================
+  PSICOTERAPIA — LAYOUT (igual referência)
+================================================== */
+.psico{
+  display:grid;
+  grid-template-columns: 1fr 520px;
+  gap:72px;
+  align-items:start;
+}
+
+/* =========================
+  TEXTOS (esquerda)
+========================= */
+.psico__left{
+  text-align:center;
+  padding-top:10px;
+}
+
+.psico__kicker{
+  font-size:14px;
+  font-weight:600;
+  color:#b8946e;
+  letter-spacing:.2px;
+  margin:0 0 10px;
+}
+
+.psico__title{
+  font-family:"Cormorant Garamond", serif;
+  font-weight:500;
+  font-size:44px;
+  line-height:1.05;
+  color:#9c6b5a;
+  margin:0 0 18px;
+}
+
+.psico__intro{
+  max-width: 86ch;
+  margin:0 auto 26px;
+  color:#6a6561;
+  line-height:1.75;
+}
+
+.psico__question{
+  margin: 14px 0 18px;
+  font-size:20px;
+  font-weight:600;
+  color:#b8946e;
+}
+
+/* =========================
+  ACCORDION (igual referência)
+========================= */
+.psico-acc{
+  max-width: 860px;
+  margin: 0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.psico-acc__btn{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  text-align:left;
+
+  padding:16px 18px;
+  border-radius:12px;
+
+  border:1px solid rgba(184,148,110,.22);
+  background: rgba(184,148,110,.14);
+
+  color:#b26f5c;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition: background .25s ease, border-color .25s ease, color .25s ease;
+}
+
+.psico-acc__icon{
+  display:inline-block;
+  transform: rotate(0deg);
+  transition: transform .25s ease;
+  font-size:14px;
+  opacity:.85;
+}
+
+/* painel fechado */
+.psico-acc__panel{
+  max-height:0;
+  overflow:hidden;
+  transition: max-height .35s ease;
+}
+
+.psico-acc__panel p{
+  margin: 14px 2px 0;
+  color:#6a6561;
+  line-height:1.7;
+  text-align:left;
+}
+
+/* estado aberto */
+.psico-acc__item.is-open .psico-acc__btn{
+  background:#b77f67;
+  border-color:#b77f67;
+  color:#fff;
+}
+
+.psico-acc__item.is-open .psico-acc__icon{
+  transform: rotate(180deg);
+}
+
+/* =========================
+  NOTA
+========================= */
+.psico__note{
+  margin-top:22px;
+  color:#7a736e;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+
+.psico__note-ico{
+  opacity:.85;
+}
+
+/* =========================
+  COLUNA DIREITA (card + CTA)
+========================= */
+.psico__right{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+}
+
+.psico__card{
+  width:80%;
+  border-radius:22px;
+  overflow:hidden;
+
+  border:1px solid rgba(184,148,110,.18);
+  box-shadow:
+    0 26px 60px rgba(0,0,0,.10),
+    0 10px 22px rgba(0,0,0,.06);
+}
+
+.psico__card img{
+  width:100%;
+  display:block;
+}
+
+/* botão abaixo do card */
+.psico__cta{
+  padding:12px 26px;
+  margin-top:-40px; /* 👈 sobe o botão */
+}
+
+/* ==================================================
+  ABORDAGEM — FUNDO + TIPOGRAFIA
+================================================== */
+.section--abordagem{
+  position:relative;
+  padding:110px 0 120px;
+  background:#fbf7f1;
+  overflow:hidden;
+}
+
+/* textura bem suave (sem imagem externa) */
+.section--abordagem::before{
+  content:"";
+  position:absolute;
+  inset:-120px;
+  pointer-events:none;
+  opacity:.22;
+  background:
+    radial-gradient(55% 45% at 20% 20%, rgba(184,148,110,.18), transparent 60%),
+    radial-gradient(45% 35% at 80% 30%, rgba(184,148,110,.14), transparent 62%),
+    radial-gradient(60% 50% at 40% 85%, rgba(184,148,110,.10), transparent 65%);
+  filter: blur(2px);
+}
+
+/* garante conteúdo acima do bg */
+.abordagem{
+  position:relative;
+  z-index:1;
+}
+
+.abordagem__header{
+  text-align:center;
+}
+
+.abordagem__kicker{
+  margin:0 0 12px;
+  font-size:14px;
+  font-weight:600;
+  color:#b8946e;
+  letter-spacing:.2px;
+}
+
+.abordagem__title{
+  margin:0 0 22px;
+  font-family:"Cormorant Garamond", serif;
+  font-weight:500;
+  font-size:44px;
+  line-height:1.05;
+  color:#9c6b5a;
+}
+
+.abordagem__text{
+  font-size: 16px;
+  max-width: 1080px;
+  margin: 0 auto;
+  color:#6a6561;
+  line-height:1.75;
+}
+
+.abordagem__text p{
+  margin: 0 auto 18px;
+  max-width: 110ch;
+}
+
+.abordagem__question{
+  margin: 34px 0 0;
+  font-family:"Cormorant Garamond", serif;
+  font-weight:500;
+  font-size:34px;
+  line-height:1.15;
+  color:#b8946e;
+}
+
+/* ==================================================
+  CARDS — 3 COLUNAS (igual referência)
+================================================== */
+.abordagem__grid{
+  margin-top:44px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:26px;
+}
+
+.ab-card{
+  background: rgba(184,148,110,.09);
+  border:1px solid rgba(184,148,110,.38);
+  border-radius:22px;
+  padding:28px 26px;
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.06);
+}
+
+.ab-card__title{
+  margin:0 0 14px;
+  font-family:"Cormorant Garamond", serif;
+  font-weight:600;
+  font-size:28px;
+  line-height:1.1;
+  color:#c08a78;
+  text-align:center;
+}
+
+.ab-card__text{
+  margin:0;
+  color:#6a6561;
+  line-height:1.7;
+}
+
+/* ==================================================
+  MODALIDADES — LAYOUT
+================================================== */
+.section--modalidades{
+  background:#fbf7f1;
+  padding:110px 0 120px;
+}
+
+.modalidades__header{
+  text-align:center;
+  margin-bottom:34px;
+}
+
+.modalidades__kicker{
+  margin:0 0 12px;
+  font-size:14px;
+  font-weight:600;
+  color:#b8946e;
+  letter-spacing:.2px;
+}
+
+.modalidades__title{
+  margin:0;
+  font-family:"Cormorant Garamond", serif;
+  font-weight:500;
+  font-size:44px;
+  line-height:1.05;
+  color:#9c6b5a;
+}
+
+/* =========================
+  GRID 3 COLUNAS
+========================= */
+.modalidades__grid{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns: 1fr 520px 1fr;
+  gap:44px;
+  align-items:center;
+}
+
+/* =========================
+  CARD (ONLINE / PRESENCIAL)
+========================= */
+.mod-card{
+  background: rgba(184,148,110,.08);
+  border:1px solid rgba(184,148,110,.38);
+  border-radius:22px;
+
+  padding:28px 28px 22px;
+
+  box-shadow: 0 18px 40px rgba(0,0,0,.06);
+}
+
+.mod-card__title{
+  margin:0 0 14px;
+  text-align:center;
+
+  font-family:"Cormorant Garamond", serif;
+  font-weight:600;
+  font-size:34px;
+  line-height:1.1;
+
+  color:#c08a78;
+}
+
+.mod-card__text{
+  font-size: 12px;
+  margin: 0;
+  color: #6a6561;
+  line-height: 1.75;
+}
+
+/* rodapé com ícone */
+.mod-card__foot{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid rgba(184,148,110,.22);
+
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+
+  color:#7a736e;
+}
+
+.mod-card__ico{
+  opacity:.9;
+  transform: translateY(1px);
+}
+
+.mod-card__foottext{
+  font-size: 10px;
+  line-height:1.5;
+}
+
+/* =========================
+  IMAGEM CENTRAL
+========================= */
+.modalidades__media{
+  display:flex;
+  justify-content:center;
+}
+
+.modalidades__photo{
+  width: 400px;
+  border-radius:22px;
+  overflow:hidden;
+
+  border:1px solid rgba(184,148,110,.18);
+  box-shadow:
+    0 26px 60px rgba(0,0,0,.10),
+    0 10px 22px rgba(0,0,0,.06);
+}
+
+.modalidades__photo img{
+  width:100%;
+  display:block;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq{
+  padding: 120px 0;
+  background: #f6f3ef;
+  text-align: center;
+}
+
+.faq__kicker{
+  color: #b97c5a;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.faq__title{
+  margin:0;
+  font-family:"Cormorant Garamond", serif;
+  font-weight:500;
+  font-size:44px;
+  line-height:1.05;
+  color:#9c6b5a;
+}
+
+.faq__subtitle{
+  color: #6e6a67;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.faq__list{
+  max-width: 820px;
+  margin: 0 auto 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faq__item{
+  background: #eadfd6;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: .25s ease;
+}
+
+.faq__question{
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 18px 22px;
+  font-size: 16px;
+  color: #8b5e4e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.faq__icon{
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #8b5e4e;
+  border-bottom: 2px solid #8b5e4e;
+  transform: rotate(45deg);
+  transition: .25s ease;
+}
+
+.faq__item.active{
+  background: #c98a68;
+}
+
+.faq__item.active .faq__question{
+  color: #fff;
+}
+
+.faq__item.active .faq__icon{
+  transform: rotate(-135deg);
+  border-color: #fff;
+}
+
+.faq__answer{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease;
+  text-align: left;
+  padding: 0 22px;
+}
+
+.faq__answer p{
+  padding: 16px 0 20px;
+  color: #5f5a56;
+  line-height: 1.6;
+}
+
+.faq__item.active .faq__answer{
+  max-height: 200px;
+}
+
+.faq__cta{
+  margin-top: 20px;
+}
+
+/* =========================
+   CONTATO — (referência)
+========================= */
+.contato{
+  position: relative;
+  padding: 92px 0;
+  background: var(--bg, #fbf7f1);
+  overflow: hidden;
+}
+
+/* se você usa fundo com ondas/textura, pode manter no ::before */
+.contato::before{
+  content:"";
+  position:absolute;
+  inset:-80px -120px auto -120px;
+  height: 420px;
+  pointer-events:none;
+  opacity:.45;
+  background:
+    radial-gradient(60% 60% at 20% 30%, rgba(184,148,110,.12) 0%, transparent 60%),
+    radial-gradient(55% 55% at 85% 10%, rgba(184,148,110,.10) 0%, transparent 65%);
+}
+
+.contato__content{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centraliza horizontalmente */
+}
+
+.contato .container{
+  width: min(1160px, 92vw);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.contato__grid{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.contato__kicker{
+  font-size: 14px;
+  letter-spacing: .5px;
+  font-weight: 600;
+  color: rgba(184,148,110,.95);
+  margin: 0 0 10px;
+}
+
+.contato__title{
+  margin:0 0 22px;
+  font-family:"Cormorant Garamond", serif;
+  font-weight:500;
+  font-size:44px;
+  line-height:1.05;
+  color: #9c6b5a;
+}
+
+.contato__text{
+  margin: 0 0 14px;
+  color: rgba(42,36,32,.72);
+  font-size: 16px;
+  line-height: 1.85;
+  max-width: 62ch;
+}
+
+.contato__actions{
+  display: flex;
+  justify-content: center;
+}
+
+.contato__meta{
+  justify-content: center;
+}
+
+/* BOTÕES (padrão do teu site) */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration:none;
+  border: 1px solid transparent;
+  transition: transform .2s ease, box-shadow .25s ease, filter .25s ease;
+  will-change: transform;
+}
+
+/* WHATS (igual referência, verde) */
+.btn--whats{
+  background: #0a8f2b;
+  color: #fff;
+  box-shadow: 0 18px 40px rgba(10,143,43,.18);
+}
+.btn--whats:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+  box-shadow: 0 24px 60px rgba(10,143,43,.22);
+}
+.btn__icon{
+  display:grid;
+  place-items:center;
+}
+
+/* contatos em linha */
+.contato__meta{
+  margin-top: 18px;
+  display:flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  align-items:center;
+}
+
+.contato__metaItem{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color: rgba(42,36,32,.70);
+  font-weight: 600;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.contato__metaItem:hover{
+  opacity: .95;
+  transform: translateY(-1px);
+}
+.contato__metaIcon{
+  opacity: .9;
+}
+
+/* FOTO (direita) */
+.contato__media{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.contato__photo{
+  width: min(420px, 92%);
+  margin: 0;
+  position: relative;
+
+  border-radius: 220px 220px 22px 22px; /* topo bem arredondado */
+  overflow: hidden;
+
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(184,148,110,.22);
+  box-shadow:
+    0 40px 90px rgba(0,0,0,.10),
+    0 18px 40px rgba(0,0,0,.06);
+}
+
+.contato__photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(65% 55% at 30% 25%, rgba(255,255,255,.25) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.10) 0%, transparent 45%);
+  opacity: .9;
+}
+
+.contato__photo img{
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display:block;
+  transform: scale(1.01);
+  transition: transform .35s ease, filter .35s ease;
+  filter: saturate(1.02) contrast(1.02);
+}
+
+/* hover premium */
+.contato__photo:hover img{
+  transform: scale(1.045);
+  filter: saturate(1.06) contrast(1.04);
+}
+
+/* =========================
+  CONTATO: PALAVRA + UNDERLINE CURVO (SVG)
+  - 3s sem
+  - 5s com
+  - 4s sem
+  - total 12s loop
+========================= */
+.curve-contato{
+  position:relative;
+  display:inline-block;
+
+  /* cor mais clara só nessa palavra */
+  color: #9c6b5a;
+}
+
+/* SVG do underline */
+.curve-contato__svg{
+  position:absolute;
+  left:-2%;
+  width:104%;
+  height:0.55em;
+
+  /* controla a posição vertical do traço */
+  bottom:-0.18em;
+
+  pointer-events:none;
+}
+
+/* traço */
+.curve-contato__path{
+  fill:none;
+  stroke: #9c6b5a; /* mesma cor da palavra */
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  /* “desenho” por dash */
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+
+  opacity:0;
+
+  animation: curvePulse 12s infinite;
+}
+
+/* =========================
+  KEYFRAMES (timing exato)
+  0%  - 25%  = 3s (sem)
+  25% - 66.666% = 5s (com)
+  66.666% - 100% = 4s (sem)
+========================= */
+@keyframes curvePulse{
+  /* 0s → 3s: escondido */
+  0%{
+    opacity:0;
+    stroke-dashoffset: 520;
+  }
+  25%{
+    opacity:0;
+    stroke-dashoffset: 520;
+  }
+
+  /* ~3s → ~3.4s: desenha e aparece */
+  30%{
+    opacity:1;
+    stroke-dashoffset: 0;
+  }
+
+  /* mantém até 8s */
+  66.666%{
+    opacity:1;
+    stroke-dashoffset: 0;
+  }
+
+  /* some rápido e “reseta” */
+  72%{
+    opacity:0;
+    stroke-dashoffset: 520;
+  }
+
+  /* fica sem até completar o ciclo */
+  100%{
+    opacity:0;
+    stroke-dashoffset: 520;
+  }
+}
+
+/* =========================
+  ACESSIBILIDADE — reduz movimento
+========================= */
+@media (prefers-reduced-motion: reduce){
+  .curve-contato__path{
+    animation:none;
+    opacity:0;
+    stroke-dashoffset: 520;
+  }
+}
+
+/* =========================
+   FOOTER — PREMIUM FINAL
+========================= */
+.site-footer{
+  position: relative;
+  background: #b0775f;
+  color: rgba(255,255,255,.92);
+
+  padding: 24px 0;
+  margin-top: 0;
+
+  /* sombra separando da seção */
+  box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+}
+
+/* brilho suave no topo */
+.site-footer::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,.55),
+    transparent
+  );
+  opacity:.6;
+}
+
+.footer__inner{
+  text-align:center;
+}
+
+.footer__line{
+  margin:0;
+  font-size:15px;
+  line-height:1.5;
+  letter-spacing:.2px;
+}
+
+.footer__dev{
+  margin-top:6px;
+  color:rgba(255,255,255,.85);
+}
+
+.footer__dev a{
+  color:rgba(255,255,255,.95);
+  text-decoration:none;
+  font-weight:600;
+  border-bottom:1px solid rgba(255,255,255,.45);
+  transition:.25s ease;
+}
+
+.footer__dev a:hover{
+  border-bottom-color:rgba(255,255,255,.9);
+  opacity:.95;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+  01) RESET + BASE
+  - Mantém identidade visual
+  - Prepara para responsividade
+  - Evita scroll horizontal
+========================= */
+@media (max-width: 991.98px){
+  html{ scroll-padding-top: 78px; } /* tablet */
+}
+
+@media (max-width: 575.98px){
+  html{ scroll-padding-top: 74px; } /* mobile */
+}
+
+/* ==================================================
+  AJUSTE GLOBAL — seções mais perto do header (mobile/tablet)
+  - Não altera desktop
+================================================== */
+
+/* Tablet */
+@media (min-width: 576px) and (max-width: 991.98px){
+  .section{ padding: 64px 0; }            /* antes 98/84 */
+  .faq{ padding: 78px 0; }                /* antes 120/104 */
+  .contato{ padding: 72px 0; }            /* antes 92/84 */
+  .section--abordagem{ padding: 78px 0 88px; }
+  .section--modalidades{ padding: 78px 0 88px; }
+}
+
+/* Mobile */
+@media (max-width: 575.98px){
+  .section{ padding-top: 14px; }            /* mais “perto” do header */
+  .faq{ padding-top: 14px; }
+  .contato{ padding-top: 14px; }
+  .section--abordagem{ padding-top: 14px; }
+  .section--modalidades{ padding-top: 14px; }
+
+  /* Sobre: dá um “empurrão” a mais só nessa seção pra foto subir */
+  .section--sobre{ padding-top: 44px; }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — BASE (apenas espaçamento/legibilidade)
+  - Sem alterar identidade visual
+  - Evita textos colados nas bordas
+================================================== */
+
+/* Mobile: até 575.98px */
+@media (max-width: 575.98px){
+  :root{
+    --gutter: 16px; /* ✅ margem confortável no mobile */
+  }
+}
+
+/* Tablet: 576px a 991.98px */
+@media (min-width: 576px) and (max-width: 991.98px){
+  :root{
+    --gutter: 20px; /* ✅ respiro no tablet */
+  }
+}
+
+/* Desktop: 992px a 1199.98px (mantém seu layout) */
+@media (min-width: 992px) and (max-width: 1199.98px){
+  :root{
+    --gutter: 24px; /* ✅ igual base, sem mexer no desktop */
+  }
+}
+
+/* Extra Large: 1200px+ (mantém) */
+@media (min-width: 1200px){
+  :root{
+    --gutter: 24px;
+  }
+}
+
+/* ==============================
+   ESPAÇAMENTO DO TOPO - RESP.
+================================= */
+main{
+  /* ✅ igual à altura do header */
+  padding-top: 0 !important;
+}
+
+/* =========================
+  NAV TOGGLE (hamburguer)
+  - Só aparece no tablet/mobile
+========================= */
+.nav__toggle{
+  display:none; /* desktop: some */
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  padding:10px;
+  border-radius:12px;
+  -webkit-tap-highlight-color:transparent;
+
+  /* toque confortável */
+  min-width:44px;
+  min-height:44px;
+}
+
+.nav__toggle:focus-visible{
+  outline:3px solid rgba(184, 148, 110, .35);
+  outline-offset:3px;
+}
+
+.nav__bars{
+  position:relative;
+  display:block;
+  width:26px;
+  height:2px;
+  background: rgba(42,36,32,.75);
+  border-radius:999px;
+  transition: transform .25s ease, background .25s ease;
+}
+
+.nav__bars::before,
+.nav__bars::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:26px;
+  height:2px;
+  background: rgba(42,36,32,.75);
+  border-radius:999px;
+  transition: transform .25s ease, top .25s ease, opacity .2s ease;
+}
+
+.nav__bars::before{ top:-8px; }
+.nav__bars::after{ top:8px; }
+
+/* ==================================================
+  TABLET + MOBILE (<= 991.98px)
+  - Hambúrguer aparece
+  - Nav vira dropdown premium
+================================================== */
+@media (max-width: 991.98px){
+
+  .nav__toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* header volta a ser 1 linha (logo + toggle) */
+  .header__inner{
+    height:78px;
+    gap:14px;
+  }
+
+  /* esconde o menu “normal” e vira dropdown */
+  .nav{
+    position:absolute;
+    left:0;
+    right:0;
+    top:100%;
+    padding: 12px 0 16px;
+
+    background: rgba(239, 226, 210, .92);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-soft);
+    border-bottom:1px solid rgba(42, 36, 32, .10);
+
+    /* fechado por padrão */
+    display:none;
+  }
+
+  /* lista em coluna */
+  .nav__list{
+    width:min(var(--container), 92vw);
+    margin:0 auto;
+    padding: 0 var(--gutter);
+
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    align-items:stretch;
+  }
+
+  .nav__link{
+    width:100%;
+    justify-content:flex-start;
+    padding: 12px 10px;
+    border-radius:12px;
+    min-height:44px;
+  }
+
+  /* abre o menu quando header tem .nav-open */
+  .header.nav-open .nav{
+    display:block;
+  }
+
+  /* anima hambúrguer -> X */
+  .header.nav-open .nav__bars{
+    background: transparent;
+  }
+  .header.nav-open .nav__bars::before{
+    top:0;
+    transform: rotate(45deg);
+  }
+  .header.nav-open .nav__bars::after{
+    top:0;
+    transform: rotate(-45deg);
+  }
+
+  /* com header fixo: main precisa só da altura normal do header */
+  main{
+    padding-top:78px;
+  }
+}
+
+/* Mobile fino (<= 575.98px): micro ajustes */
+@media (max-width: 575.98px){
+  .header__inner{
+    height:74px;
+  }
+  main{
+    padding-top:74px;
+  }
+  .brand__name{
+    font-size:19px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================================================
+  RESPONSIVIDADE — HERO + BOTÕES - CELULAR
+================================================== */
+/* Mobile: até 575.98px */
+@media (max-width: 575.98px){
+
+  /* ✅ mobile: hero não pode depender de 100vh fixo
+     (barra do navegador muda altura) */
+  .hero{
+    height:auto;
+    min-height: 88svh;
+    padding-bottom:56px;
+    align-items:flex-start; /* conteúdo começa mais alto */
+  }
+
+  .hero__content{
+    padding-top: 148px;    /* header já ocupa bastante no mobile */
+    max-width: 100%;
+  }
+
+  /* ✅ texto mais legível, sem estourar */
+  .hero__title{
+    font-size: 40px;
+    line-height: 1.08;
+  }
+
+  .hero__subtitle{
+    margin-top:16px;
+    font-size: 12px;
+    line-height: 1.65;
+    max-width: 60ch;
+  }
+
+  /* ✅ botões: mais fáceis de tocar, sem mudar estilo */
+  .btn{
+    padding:12px 18px;
+    font-size:10px;
+    width:auto;
+  }
+
+  /* ✅ se tiver mais de um botão no futuro, evita “aperto” */
+  .hero__actions{
+    margin-top:22px;
+    gap:10px;
+  }
+
+  /* ✅ overlay um pouco mais forte no mobile pra leitura,
+     mantendo as mesmas cores/identidade */
+  .hero__bg{
+    background-image:
+      linear-gradient(180deg,
+        rgba(251,247,241,.94) 0%,
+        rgba(251,247,241,.86) 50%,
+        rgba(251,247,241,.35) 100%
+      ),
+      url("./img/fundo-home.webp");
+
+    background-position: 72% center;
+  }
+
+  /* ✅ underline não “invade” linha de baixo */
+  .word-curve__svg{
+    height:0.5em;
+    bottom:-0.16em;
+  }
+
+  .word-curve__path{
+    stroke-width: 3.5;
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — SOBRE - CELULAR
+================================================== */
+/* Mobile: até 575.98px */
+@media (max-width: 575.98px){
+
+  /* ✅ SOBRE: vira 1 coluna, imagem acima */
+  .sobre{
+    grid-template-columns: 1fr;
+    gap:22px;
+    align-items:start;
+  }
+
+  .sobre__media{
+    order:0;
+  }
+
+  .sobre__content{
+    order:1;
+  }
+
+  .sobre__title{
+    font-size: 20px;
+    margin:8px 0 14px;
+  }
+
+  .sobre__kicker{
+    font-size: 16px;
+  }
+
+  .sobre__content p{
+    font-size: 10px;
+    margin-bottom:14px;
+  }
+
+  .sobre__accordion{
+    font-size: 10px;
+  }
+
+  .sobre__panel {
+    font-size: 10px;
+  }
+
+  /* ✅ card fica proporcional e sem “peso” exagerado */
+  .sobre__card{
+    border-radius: 14px;
+  }
+}
+
+  /* ================================================
+  RESPONSIVIDADE — PSICOTERAPIA - CELULAR
+================================================== */
+@media (max-width: 575.98px){
+
+  /* ✅ PSICO: vira 1 coluna, card/CTA abaixo */
+  .psico{
+    grid-template-columns: 1fr;
+    gap:24px;
+  }
+
+  .psico__left{
+    text-align:left; /* melhora leitura no mobile */
+    padding-top:0;
+  }
+
+  .psico__title{
+    font-size: 20px;
+  }
+
+  .psico__kicker{
+    font-size: 16px;
+  }
+
+  .psico__intro{
+    font-size: 10px;
+    max-width: 100%;
+    margin: 0 0 18px;
+  }
+
+  .psico__question{
+    font-size: 12px;
+    margin: 10px 0 14px;
+  }
+
+  .psico-acc{
+    max-width: 100%;
+    margin: 0;
+    gap:12px;
+  }
+
+  .psico-acc__icon{
+    font-size: 14px;
+  }
+
+  .psico-acc__btn{
+    font-size: 10px;
+    padding:14px 14px;
+  }
+
+  .psico-acc__panel p{
+    font-size: 10px;
+    margin: 12px 2px 0;
+  }
+
+  .psico__note{
+    font-size: 10px;
+    justify-content:center;
+  }
+
+  .psico__right{
+    align-items:stretch;
+  }
+
+  .psico__card{
+    width:100%;
+    border-radius:18px;
+  }
+
+  /* ✅ no mobile, não “sobre” demais o botão (evita corte/overlap estranho) */
+  .psico__cta{
+    margin-top:12px;
+    width:100%;
+    justify-content:center;
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — ABORDAGEM - CELULAR
+================================================== */
+/* Mobile: até 575.98px */
+
+@media (max-width: 575.98px){
+
+  .section--abordagem{
+    padding: 24px 0 92px;
+  }
+
+  .abordagem__title{
+    text-align: left;
+    font-size: 20px;
+  }
+
+  .abordagem__kicker{
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .abordagem__text{
+    text-align: left;
+    font-size: 10px;
+    max-width: 100%;
+  }
+
+  .abordagem__text p{
+    max-width: 100%;
+    margin: 0 0 14px;
+  }
+
+  .abordagem__question{
+    margin-top: 16px;
+    font-size: 20px;
+  }
+
+  /* ✅ cards: 1 coluna no mobile */
+  .abordagem__grid{
+    grid-template-columns: 1fr;
+    gap:16px;
+    margin-top: 28px;
+  }
+
+  .ab-card{
+    padding:22px 18px;
+    border-radius:18px;
+  }
+
+  .ab-card__title{
+    font-size: 16px;
+  }
+
+  .ab-card__text{
+    font-size: 10px;
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — MODALIDADES - CELULAR
+================================================== */
+/* ✅ modalidades: 1 coluna no mobile */
+@media (max-width: 575.98px){
+  
+  .section--modalidades{
+    padding: 24px 0 92px;
+  }
+
+  .modalidades__kicker{
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .modalidades__header{
+    margin-bottom: 22px;
+  }
+
+  .modalidades__title{
+    text-align: left;
+    font-size: 20px;
+  }
+
+  .modalidades__grid{
+    grid-template-columns: 1fr;
+    gap:16px;
+    margin-top: 22px;
+    align-items:stretch;
+  }
+
+  /* coloca imagem no meio (entre os cards) sem mexer no HTML */
+  .modalidades__media{
+    order: 2;
+  }
+
+  .mod-card--online{
+    order: 1;
+  }
+
+  .mod-card--presencial{
+    order: 3;
+  }
+
+  .modalidades__photo{
+    width: 100%;
+    border-radius:18px;
+  }
+
+  /* ✅ melhora proporção visual da foto no mobile sem cortar “feio”
+     (mantém height:auto, só sugere uma proporção se a imagem for muito alta) */
+  .modalidades__photo img{
+    width:100%;
+    height:auto;
+  }
+
+  .mod-card{
+    padding:22px 18px 18px;
+    border-radius:18px;
+  }
+
+  .mod-card__title{
+    font-size:20px;
+  }
+
+  .mod-card__foottext{
+    font-size: 10px; /* mantém */
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — FAQ - CELULAR
+================================================== */
+/* Mobile: até 575.98px */
+@media (max-width: 575.98px){
+  
+  .faq{
+    padding: 24px 0;
+    text-align: left; /* ✅ melhora leitura */
+  }
+
+  .faq__kicker{
+    font-size: 16px;
+  }
+
+  .faq__title{
+    font-size: 20px;
+  }
+
+  .faq__subtitle{
+    font-size: 10px;
+    margin-top: 14px;
+    margin-bottom: 18px;
+  }
+
+  .faq__list{
+    max-width: 100%;
+    margin: 0 0 26px;
+    gap: 12px;
+  }
+
+  .faq__item{
+    border-radius: 12px;
+  }
+
+  .faq__question{
+    padding: 14px 14px;
+    font-size: 10px;
+    align-items:flex-start;
+  }
+
+  .faq__answer{
+    padding: 0 14px;
+  }
+
+  .faq__answer p{
+    font-size: 10px;
+    padding: 12px 0 16px;
+  }
+
+  .faq__cta{
+    margin-top: 16px;
+    display:flex;
+    justify-content:flex-start;
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — CONTATO - CELULAR
+================================================== */
+/* Mobile: até 575.98px */
+@media (max-width: 575.98px){
+  
+  .contato{
+    padding: 24px 0;
+  }
+
+  .contato__grid{
+    grid-template-columns: 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .contato__content{
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .contato__title{
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .contato__kicker{
+    font-size: 16px;
+  }
+
+  .contato__text{
+    font-size: 10px;
+    max-width: 100%;
+  }
+
+  .contato__actions{
+    justify-content: center;
+    width: 50%;
+  }
+
+  .btn--whats{
+    width: 100%;
+    justify-content:center;
+  }
+
+  .contato__meta{
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .contato__media{
+    justify-content: center;
+  }
+
+  .contato__photo{
+    width: 100%;
+    border-radius: 160px 160px 18px 18px;
+  }
+
+  .contato__photo img{
+    height: 420px; /* ✅ evita imagem gigante no mobile */
+  }
+
+  /* ✅ underline do título não invade linhas */
+  .curve-contato__svg{
+    height:0.5em;
+    bottom:-0.16em;
+  }
+
+  .curve-contato__path{
+    stroke-width: 3.5;
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — FOOTER - CELULAR
+================================================== */
+/* Mobile: até 575.98px */
+@media (max-width: 575.98px){
+  
+  .site-footer{
+    padding: 20px 0;
+  }
+
+  .footer__inner{
+    text-align:left; /* ✅ leitura melhor no mobile */
+  }
+
+  .footer__line{
+    font-size:14px;
+    line-height:1.6;
+  }
+
+  .footer__dev{
+    margin-top:8px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================================================
+  RESPONSIVIDADE — HERO + BOTÕES - TABLET
+================================================== */
+/* Tablet: 576px a 991.98px */
+@media (min-width: 576px) and (max-width: 991.98px){
+
+  /* ✅ reduz um pouco o “peso” vertical do hero */
+  .hero{
+    height:auto;         /* evita cortes em tablets menores */
+    min-height: 92svh;   /* mantém sensação de hero grande */
+    padding-bottom:72px;
+  }
+
+  .hero__content{
+    padding-top: 64px;   /* header menor no tablet */
+    max-width: 600px;
+  }
+
+  .hero__title{
+    font-size: 52px;     /* escala mantendo identidade */
+  }
+
+  .hero__subtitle{
+    font-size: 17px;
+  }
+
+  /* ✅ ajusta o foco da imagem (menos “corte” do rosto/assunto) */
+  .hero__bg{
+    background-position: 70% center;
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — SOBRE - TABLET
+================================================== */
+/* Tablet: 576px a 991.98px */
+@media (min-width: 576px) and (max-width: 991.98px){
+
+  /* ✅ SOBRE: reduz gap e permite colunas mais flexíveis */
+  .sobre{
+    grid-template-columns: 360px 1fr;
+    gap:20px;
+    align-items:start;
+  }
+
+  .sobre__title{
+    font-size: 24px;
+  }
+
+  .sobre__content p{
+    font-size: 12px;
+  }
+
+  .sobre__panel {
+    font-size: 12px;
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — PSICOTERAPIA - TABLET
+================================================== */
+/* Tablet: 576px a 991.98px */
+@media (min-width: 576px) and (max-width: 991.98px){
+  /* ✅ PSICO: coluna direita menor e sem “aperto” */
+  .psico{
+    grid-template-columns: 1fr 420px;
+    gap:44px;
+  }
+
+  .psico__title{
+    font-size:24px;
+  }
+
+  .psico__intro{
+    font-size: 12px;
+    max-width: 78ch;
+  }
+
+  .psico__card{
+    font-size: 12px;
+    width:92%;
+  }
+
+  .psico__question{
+    font-size: 12px;
+  }
+
+  .psico-acc__panel{
+    font-size: 12px;
+  }
+
+  /* mantém o efeito do botão “subindo”, mas menos agressivo */
+  .psico__cta{
+    margin-top:-28px;
+  }
+
+  .psico__note{
+    font-size: 10px;
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — ABORDAGEM - TABLET
+================================================== */
+/* Tablet: 576px a 991.98px */
+@media (min-width: 576px) and (max-width: 991.98px){
+
+  /* ✅ padding mais confortável no tablet */
+  .section--abordagem{
+    padding: 40px 0 104px;
+  }
+
+  .abordagem__title{
+    font-size: 24px;
+  }
+
+  .abordagem__text{
+    font-size: 12px;
+  }
+
+  .abordagem__question{
+    font-size: 12px;
+  }
+
+  /* ✅ cards: 2 colunas no tablet */
+  .abordagem__grid{
+    grid-template-columns: repeat(3, 1fr);
+    gap:20px;
+  }
+
+  .ab-card{
+    padding:24px 22px;
+  }
+
+  .ab-card__title{
+    font-size: 20px;
+  }
+
+  .ab-card__text{
+    font-size: 12px;
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — MODALIDADES - TABLET
+================================================== */
+/* Tablet: 576px a 991.98px */
+@media (min-width: 576px) and (max-width: 991.98px){
+
+  /* ✅ modalidades: vira 2 colunas (cards) + imagem embaixo (grid areas) */
+  .section--modalidades{
+    padding: 40px 0 104px;
+  }
+
+  .modalidades__title{
+    font-size: 24px;
+  }
+
+  .modalidades__grid{
+    grid-template-columns: 1fr 320px 1fr;
+    gap: 5px;
+    align-items: center;
+  }
+
+  /* imagem ocupa a largura toda abaixo */
+  .modalidades__media{
+    grid-column: auto;
+    justify-content:center;
+    margin-top: 0 ;
+  }
+
+  .modalidades__photo{
+    width: min(300px, 100%);
+  }
+
+  .mod-card__title{
+    font-size: 14px;
+  }
+
+  /* texto com mais “respiro” */
+  .mod-card__text{
+    font-size: 12px; /* mantém identidade */
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — FAQ - TABLET
+================================================== */
+/* Tablet: 576px a 991.98px */
+@media (min-width: 576px) and (max-width: 991.98px){
+  
+  .faq{
+    padding: 40px 0;
+  }
+
+  .faq__title{
+    font-size: 24px;
+  }
+
+  .faq__list{
+    max-width: 760px;
+    margin-bottom: 34px;
+  }
+
+  .faq__question{
+    padding: 16px 18px;
+    font-size: 15px;
+  }
+
+  .faq__answer{
+    padding: 0 18px;
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — CONTATO - TABLET
+================================================== */
+/* Tablet: 576px a 991.98px */
+@media (min-width: 576px) and (max-width: 991.98px){
+  
+  .contato{
+    padding: 40px 0;
+  }
+
+  .contato__grid{
+    grid-template-columns: 1fr 1fr;
+    gap: 34px;
+    align-items: center;
+  }
+
+  .contato__title{
+    font-size: 24px;
+  }
+
+  .contato__text{
+    max-width: 60ch;
+  }
+
+  .contato__photo{
+    width: min(420px, 100%);
+  }
+
+  .contato__photo img{
+    height: 460px; /* ✅ reduz altura no tablet */
+  }
+}
+
+/* ==================================================
+  RESPONSIVIDADE — FOOTER - TABLET
+================================================== */
+/* Tablet: 576px a 991.98px */
+@media (min-width: 576px) and (max-width: 991.98px){
+  
+  .site-footer{
+    padding: 22px 0;
+  }
+
+  .footer__line{
+    font-size:14px;
+  }
+}
+
+
+
+
+
+
+
+/* ==================================================
+  FIX — HERO - TABLET
+================================================== */
+
+/* FIX — HERO ocupar 100% da tela no mobile/tablet */
+@media (max-width: 991.98px){
+  .hero{
+    height: 100svh;      /* viewport real (sem bug da barra do navegador) */
+    min-height: 100svh;
+    padding-bottom: 0;   /* evita “sobrar” espaço estranho */
+  }
+
+  .hero__bg{
+    inset: 0;
+    background-size: cover;
+  }
+}
+
+/* fallback extra (alguns browsers) */
+@supports (height: 100dvh){
+  @media (max-width: 991.98px){
+    .hero{ height: 100dvh; min-height: 100dvh; }
+  }
+}
+
+@media (max-width: 991.98px){
+  .hero{
+    height: 100svh;
+    min-height: 100svh;
+  }
+}
+@supports (height: 100dvh){
+  @media (max-width: 991.98px){
+    .hero{ height: 100dvh; min-height: 100dvh; }
+  }
+}
+
+@media (max-width: 991.98px){
+  .hero{
+    height: 100svh;
+    min-height: 100svh;
+    padding-bottom: 0;
+  }
+}
+@supports (height: 100dvh){
+  @media (max-width: 991.98px){
+    .hero{ height: 100dvh; min-height: 100dvh; }
+  }
+}

@@ -1,0 +1,598 @@
+<!-- ==================================================
+  INDEX.HTML — Site Psicóloga (estrutura base)
+  - Primeiro: HTML
+  - Depois: CSS
+  - Por fim: JS
+================================================== -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <!-- =========================
+    HEAD / META
+  ========================= -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Site profissional de Psicóloga — atendimentos, abordagem, modalidades e contato." />
+  <title>Psicóloga | Kethlen Souza</title>
+
+  <!-- =========================
+    FONTS (harmonia: elegante + leve)
+    (CSS virá depois, mas já deixo a fonte pronta)
+  ========================= -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- =========================
+    CSS (vamos criar no próximo passo)
+  ========================= -->
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <!-- ================================================
+    HEADER / NAVBAR (fixa no topo)
+    - Logo à esquerda (imagem)
+    - Menu à direita
+    - Fundo bege (topo) e transparente no scroll (CSS+JS depois)
+  ================================================== -->
+  <header class="header" id="topo">
+    <div class="container header__inner">
+      
+<!-- =========================
+  LOGO (texto)
+========================= -->
+<a class="brand" href="#inicio" aria-label="Voltar para o início">
+  <span class="brand__name">Kethlen Souza</span>
+</a>
+
+<nav class="nav" id="primary-nav" aria-label="Navegação principal"></nav>
+
+  <button class="nav__toggle"
+          type="button"
+          aria-label="Abrir menu"
+          aria-controls="primary-nav"
+          aria-expanded="false">
+    <span class="nav__bars" aria-hidden="true"></span>
+  </button>
+
+      <!-- =========================
+        NAVEGAÇÃO
+      ========================= -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="#inicio">início</a></li>
+          <li class="nav__item"><a class="nav__link" href="#sobre">sobre mim</a></li>
+          <li class="nav__item"><a class="nav__link" href="#psicoterapia">psicoterapia</a></li>
+          <li class="nav__item"><a class="nav__link" href="#abordagem">abordagem</a></li>
+          <li class="nav__item"><a class="nav__link" href="#modalidades">modalidades</a></li>
+          <li class="nav__item"><a class="nav__link" href="#faq">faq</a></li>
+          <li class="nav__item"><a class="nav__link" href="#contato">contato</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ==================================================
+    MAIN
+  ================================================== -->
+  <main>
+
+    <!-- =========================
+  SEÇÃO: INÍCIO (HERO 100vh com imagem)
+========================= -->
+<section class="hero" id="inicio">
+  <!-- bg por CSS (imagem de fundo) -->
+  <div class="hero__bg" aria-hidden="true"></div>
+
+  <div class="container hero__inner">
+    <div class="hero__content">
+      
+      <h1 class="hero__title">
+        Onde há escuta, há<br />
+        <span class="word-curve">
+          possibilidade
+          <svg class="word-curve__svg" viewBox="0 0 400 60" aria-hidden="true" focusable="false">
+            <!-- linha curva “assinatura” -->
+            <path class="word-curve__path"
+              d="M10,38 C80,55 150,55 220,40 C275,28 330,25 390,30" />
+          </svg>
+        </span>
+        de<br />
+        transformação
+      </h1>
+
+      <p class="hero__subtitle">
+        Psicoterapia de orientação psicanalítica para<br/> quem deseja construir novos caminhos.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#contato">Agendar Sessão</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ==================================================
+  SEÇÃO: SOBRE
+================================================== -->
+<section class="section section--sobre" id="sobre">
+  <div class="container sobre">
+
+    <!-- =========================
+      CARD FOTO
+    ========================= -->
+    <div class="sobre__media">
+      <div class="sobre__card">
+        <img src="./img/kethlen-01.webp" alt="Foto da psicóloga" />
+      </div>
+    </div>
+
+    <!-- =========================
+      CONTEÚDO
+    ========================= -->
+    <div class="sobre__content">
+
+      <span class="sobre__kicker">Sobre mim</span>
+
+      <h2 class="sobre__title">
+        Olá, Sou Kethlen Souza
+      </h2>
+
+      <p>
+        Psicóloga (CRP 07/072129), natural de Canoas – RS.
+        Minha relação com a psicanálise começou ainda na graduação e desde então sigo comprometida
+        com uma escuta que respeita a singularidade de cada sujeito. Atuei por anos na psicologia hospitalar,
+        especialmente em UTIs, em contextos de cuidados intensivos e paliativos, onde me aproximei profundamente
+        do sofrimento humano em suas expressões mais complexas. Essas experiências moldaram meu olhar clínico e
+        minha ética de trabalho.
+      </p>
+
+      <p>
+        Hoje, moro em Florianópolis e me dedico exclusivamente à clínica. Atendo adolescentes e adultos
+        em psicoterapia individual, tanto presencial quanto online. Meu trabalho se sustenta na psicanálise
+        como direção clínica e sigo em processo de formação permanente.
+      </p>
+
+      <!-- =========================
+        ACCORDION
+      ========================= -->
+      <button class="sobre__accordion" type="button">
+        Minha Formação ⬎
+      </button>
+
+      <div class="sobre__panel">
+        <ul>
+          <li>Graduação em Psicologia (2015) pela Universidade do Noroeste do Estado do Rio Grande do Sul (Unijuí);</li>
+          <li>Especialização em Saúde pelo Programa de Residência Multiprofissional – Atenção ao Paciente Adulto Crítico – Hospital Municipal São José, Joinville/SC;</li>
+          <li>Especialista em Psicologia Hospitalar, CRP/RS;</li>
+          <li>Entre os anos de 2017 e 2023 atuou realizando atendimento a pacientes e seus familiares em contexto de internação hospitalar;</li>
+          <li>Atualmente faz parte do Programa de Formação Permanente em Psicanálise da Maiêutica Florianópolis – Escola Psicanalítica;</li>
+        </ul>
+      </div>
+
+      <a href="#contato" class="btn btn--primary sobre__cta">
+        Agendar Sessão
+      </a>
+
+    </div>
+  </div>
+</section>
+
+    <!-- ==================================================
+  SEÇÃO: PSICOTERAPIA
+================================================== -->
+<section class="section section--psico" id="psicoterapia">
+  <div class="container psico">
+
+    <!-- =========================
+      COLUNA ESQUERDA (TEXTO + ACCORDION)
+    ========================= -->
+    <div class="psico__left">
+
+      <p class="psico__kicker">Serviços</p>
+
+      <h2 class="psico__title">Psicoterapia Individual</h2>
+
+      <p class="psico__intro">
+        A clínica psicanalítica oferece um espaço sustentado pela escuta, em que o sujeito pode colocar em palavras
+        aquilo que o atravessa — ainda que não compreenda inteiramente o que diz. Mais do que buscar explicações ou
+        soluções, trata-se de um percurso em que, a partir da fala, algo do sofrimento possa ser deslocado de sua
+        fixação sintomática. Ao implicar-se no que diz, o sujeito pode produzir um novo posicionamento frente ao que
+        antes o fazia padecer, permitindo que outra leitura de si se inscreva.
+      </p>
+
+      <h3 class="psico__question">Como funciona o processo terapêutico?</h3>
+
+      <!-- =========================
+        ACCORDION (3 itens)
+      ========================= -->
+      <div class="psico-acc" data-acc>
+
+        <!-- Item 1 -->
+        <div class="psico-acc__item">
+          <button class="psico-acc__btn" type="button" data-acc-btn aria-expanded="false">
+            <span class="psico-acc__icon" aria-hidden="true">▾</span>
+            Sessão inicial
+          </button>
+
+          <div class="psico-acc__panel" data-acc-panel>
+            <p>
+              A primeira sessão é um momento de abertura onde o paciente poderá falar livremente sobre o que o levou a
+              estar ali. É também nesse encontro que podem ser colocadas questões como valor, frequência e modalidade
+              das sessões, elementos que não são meramente práticos e fazem parte do enquadre do processo psicoterapêutico.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="psico-acc__item">
+          <button class="psico-acc__btn" type="button" data-acc-btn aria-expanded="false">
+            <span class="psico-acc__icon" aria-hidden="true">▾</span>
+            Entrevistas iniciais
+          </button>
+
+          <div class="psico-acc__panel" data-acc-panel>
+            <p>
+              As entrevistas iniciais compõem um tempo preliminar da escuta em que o paciente segue colocando em palavras
+              algo do seu sofrimento e da sua história. É também o momento de construção do vínculo terapêutico —
+              transferência, que sustentará a sequência do processo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="psico-acc__item">
+          <button class="psico-acc__btn" type="button" data-acc-btn aria-expanded="false">
+            <span class="psico-acc__icon" aria-hidden="true">▾</span>
+            Acompanhamento
+          </button>
+
+          <div class="psico-acc__panel" data-acc-panel>
+            <p>
+              O processo se desenvolve de forma contínua, respeitando o ritmo do sujeito e os movimentos que se produzem
+              na transferência. É um tempo de construção, onde o que se repete, o que retorna e o que escapa pode começar
+              a ser escutado.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =========================
+        NOTA / INFO
+      ========================= -->
+      <p class="psico__note">
+        <span class="psico__note-ico" aria-hidden="true">👤</span>
+        Atendimento para adolescentes e adultos
+      </p>
+
+    </div>
+
+    <!-- =========================
+      COLUNA DIREITA (CARD IMAGEM + CTA)
+    ========================= -->
+    <aside class="psico__right" aria-label="Imagem e agendamento">
+      <div class="psico__card">
+        <!-- você vai trocar a imagem depois -->
+        <img src="./img/kethlen-psicoterapia.webp" alt="Atendimento em psicoterapia" />
+      </div>
+
+      <a class="btn btn--primary psico__cta" href="#contato">Agendar Sessão</a>
+    </aside>
+
+  </div>
+</section>
+
+    <!-- ==================================================
+  SEÇÃO: ABORDAGEM
+================================================== -->
+<section class="section section--abordagem" id="abordagem">
+  <div class="container abordagem">
+
+    <!-- =========================
+      HEADER
+    ========================= -->
+    <header class="abordagem__header">
+      <p class="abordagem__kicker">Abordagem Teórica</p>
+      <h2 class="abordagem__title">Psicanálise</h2>
+
+      <div class="abordagem__text">
+        <p>
+          Minha prática é guiada pela psicanálise, concebida como uma praxis clínica que se orienta pela escuta do sujeito
+          do inconsciente. No espaço de análise o paciente é convidado a falar e a escutar-se, possibilitando o surgimento
+          de formações do inconsciente que atravessam seu modo de viver e sofrer. A partir do vínculo transferencial e das
+          intervenções do analista, constrói-se um percurso singular, que não se apoia em diagnósticos fechados, julgamentos
+          ou protocolos, mas na aposta na palavra e na ética do desejo.
+        </p>
+
+        <p>
+          No que tange a formação do analista, alinho-me aos preceitos de Freud e Lacan e na compreensão de que esta sustenta-se
+          no tripé: análise pessoal, supervisão clínica e estudo teórico. Compreendendo-a como algo que não se encerra em etapas
+          formais ou com certificações. Trata-se de um processo contínuo que é sustentado pela experiência de análise e pelo
+          compromisso ético com o inconsciente.
+        </p>
+      </div>
+
+      <h3 class="abordagem__question">
+        O que pode levar alguém a procurar a escuta psicanalítica?
+      </h3>
+    </header>
+
+    <!-- =========================
+      GRID DE CARDS (3)
+    ========================= -->
+    <div class="abordagem__grid">
+
+      <article class="ab-card">
+        <h4 class="ab-card__title">Sofrimentos psíquicos contemporâneos</h4>
+        <p class="ab-card__text">
+          Demandas ligadas à ansiedade, angústia, sensação de vazio, inquietações existenciais e dificuldades para lidar com
+          os impasses da vida cotidiana.
+        </p>
+      </article>
+
+      <article class="ab-card">
+        <h4 class="ab-card__title">Relacionamentos e afetos</h4>
+        <p class="ab-card__text">
+          Conflitos familiares, relacionamentos amorosos, separações, repetições afetivas e dificuldades de se posicionar nas
+          relações interpessoais.
+        </p>
+      </article>
+
+      <article class="ab-card">
+        <h4 class="ab-card__title">Questões subjetivas e de trajetória</h4>
+        <p class="ab-card__text">
+          Vivências de luto e perda, transições importantes, crises de identidade, impasses profissionais, além de sintomas que
+          surgem sem causa evidente, mas que afetam profundamente o sujeito.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================
+  SEÇÃO: MODALIDADES
+================================================== -->
+<section class="section section--modalidades" id="modalidades">
+  <div class="container modalidades">
+
+    <!-- =========================
+      TÍTULO
+    ========================= -->
+    <header class="modalidades__header">
+      <p class="modalidades__kicker">Modalidades</p>
+      <h2 class="modalidades__title">Modalidades de Atendimento</h2>
+    </header>
+
+    <!-- =========================
+      GRID (CARD / IMAGEM / CARD)
+    ========================= -->
+    <div class="modalidades__grid">
+
+      <!-- ===== CARD ESQUERDA: ONLINE ===== -->
+      <article class="mod-card mod-card--online">
+        <h3 class="mod-card__title">Online</h3>
+
+        <p class="mod-card__text">
+          A modalidade online é uma alternativa prática e acessível, que permite manter a constância do processo terapêutico,
+          mesmo à distância. Com um ambiente tranquilo e conexão estável, a escuta acontece com o mesmo cuidado e atenção da
+          clínica presencial.
+        </p>
+
+        <div class="mod-card__foot">
+          <span class="mod-card__ico" aria-hidden="true">🎥</span>
+          <span class="mod-card__foottext">Atendimento Via Google Meet</span>
+        </div>
+      </article>
+
+      <!-- ===== IMAGEM CENTRAL ===== -->
+      <div class="modalidades__media" aria-label="Foto da psicóloga">
+        <div class="modalidades__photo">
+          <!-- você troca a imagem depois -->
+          <img src="./img/kethlen-modalidades.webp" alt="Foto da psicóloga" />
+        </div>
+      </div>
+
+      <!-- ===== CARD DIREITA: PRESENCIAL ===== -->
+      <article class="mod-card mod-card--presencial">
+        <h3 class="mod-card__title">Presencial</h3>
+
+        <p class="mod-card__text">
+          Os atendimentos presenciais acontecem em Florianópolis, em ambientes reservados que oferecem as condições necessárias.
+        </p>
+
+        <div class="mod-card__foot">
+          <span class="mod-card__ico" aria-hidden="true">📍</span>
+          <span class="mod-card__foottext">
+            Rua Esteves Júnior, 366, Ed Royal Tower,<br />
+            Florianópolis-SC
+          </span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================
+  SEÇÃO: FAQ
+================================================== -->
+
+    <section id="faq" class="faq">
+  <div class="container">
+
+    <p class="faq__kicker">F.A.Q</p>
+    <h2 class="faq__title">Perguntas Frequentes</h2>
+    <p class="faq__subtitle">
+      Abaixo, reuni algumas dúvidas que escuto com frequência e que talvez também façam sentido para você.
+    </p>
+
+    <div class="faq__list">
+
+      <!-- ITEM -->
+      <div class="faq__item">
+        <button class="faq__question">
+          Preciso ter um problema definido para iniciar a psicoterapia?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__answer">
+          <p>
+            Não, muitas vezes a busca pela escuta psicanalítica surge de um mal-estar que pode ser difícil nomear.
+            Não é necessário ter um motivo claro ou um “problema definido” — basta algo que incomode,
+            insista ou convoque a pergunta.
+          </p>
+        </div>
+      </div>
+
+      <!-- ITEM -->
+      <div class="faq__item">
+        <button class="faq__question">
+          Com que frequência ocorrem as sessões?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__answer">
+          <p>
+            A frequência é pensada caso a caso, a partir da escuta e da construção do processo com cada sujeito.
+            De modo geral, o trabalho psicanalítico se sustenta na regularidade e todas as particularidades
+            referentes à frequência do tratamento serão conversadas em sessão.
+          </p>
+        </div>
+      </div>
+
+      <!-- ITEM -->
+      <div class="faq__item">
+        <button class="faq__question">
+          Como saber se a psicanálise é para mim?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__answer">
+          <p>
+            A psicanálise não parte de um modelo fixo e não se propõe a oferecer soluções prontas.
+            Ela anda na contramão e oferece espaço de escuta, no qual o próprio interesse em ser escutado
+            pode ser um sinal de um encontro possível com a psicanálise.
+          </p>
+        </div>
+      </div>
+
+      <!-- ITEM -->
+      <div class="faq__item">
+        <button class="faq__question">
+          Existe um tempo mínimo ou máximo de psicoterapia?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__answer">
+          <p>
+            Não há um tempo pré-determinado para a duração do processo.
+            O trabalho segue a singularidade de cada caso, respeitando o tempo de elaboração de cada um.
+          </p>
+        </div>
+      </div>
+
+      <!-- ITEM -->
+      <div class="faq__item">
+        <button class="faq__question">
+          Atende por convênio?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__answer">
+          <p>
+            Atualmente o atendimento é particular.
+            É possível verificar se o seu plano aceita reembolso por meio dos recibos fornecidos.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="faq__cta">
+      <a href="#contato" class="btn btn--primary">Agendar Sessão</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================================================
+  SEÇÃO: CONTATO
+================================================== -->
+
+    <section id="contato" class="contato">
+  <div class="container contato__grid">
+
+    <!-- ESQUERDA -->
+    <div class="contato__content">
+      <p class="contato__kicker">Entrar em Contato</p>
+
+      <span class="curve-contato contato__title">
+          Vamos Conversar?
+          <svg class="curve-contato__svg" viewBox="0 0 400 60" aria-hidden="true" focusable="false">
+            <!-- linha curva “assinatura” -->
+            <path class="curve-contato__path"
+              d="M10,38 C80,55 150,55 220,40 C275,28 330,25 390,30" />
+          </svg>
+      </span>
+
+      <p class="contato__text">
+        Se algo do que leu aqui fez sentido para você ou despertou o desejo de iniciar um processo psicoterapêutico,
+        fico à disposição para acolher suas questões.
+      </p>
+
+      <p class="contato__text">
+        Você pode entrar em contato para agendar sua primeira sessão ou apenas para esclarecer dúvidas.
+        Será um prazer te escutar.
+      </p>
+
+      <div class="contato__actions">
+        <a class="btn btn--whats" href="https://wa.me/5549991753433" target="_blank" rel="noopener">
+          <span class="btn__icon" aria-hidden="true">
+            <!-- ícone simples (pode trocar pelo teu) -->
+            <img width="28" height="28" src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="whatsapp--v1"/>
+          </span>
+          Agendar Sessão
+        </a>
+      </div>
+
+      <div class="contato__meta">
+        <a class="contato__metaItem" href="tel:+5549991753433">
+          <span class="contato__metaIcon" aria-hidden="true">📞</span>
+          <span>(51) 99999-9999</span>
+        </a>
+
+        <a class="contato__metaItem" href="mailto:leticiakklug@gmail.com">
+          <span class="contato__metaIcon" aria-hidden="true">✉️</span>
+          <span>kethlensouza@gmail.com</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- DIREITA -->
+    <div class="contato__media">
+      <figure class="contato__photo">
+        <!-- troque pelo teu arquivo depois -->
+        <img src="./img/kethlen-contato.webp" alt="Psicóloga Kethlen Souza" loading="lazy">
+      </figure>
+    </div>
+
+  </div>
+</section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer__inner">
+      <p class="footer__line">Psicóloga Kethlen Souza © 2025 — Todos os Direitos Reservados</p>
+      <p class="footer__line footer__dev">
+        Site desenvolvido por: <a href="https://filipeassis.dev" target="_blank" rel="noopener">Filipe Assis</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- =========================
+    JS (vamos criar no final)
+  ========================= -->
+  <script src="./script.js" defer></script>
+</body>
+</html>
